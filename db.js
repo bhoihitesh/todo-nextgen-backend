@@ -11,7 +11,7 @@ const ConnectMongoDB = async () => {
       );
       process.exit(1); // Exit if no URI is provided
     }
-    await mongoose.connect(process.env.MONGODB_URI);
+    await mongoose.connect(mongoURI);
     console.warn("MongoDB Database Connected Successfully");
   } catch (error) {
     console.warn("Error while connecting to MongoDB", error);
