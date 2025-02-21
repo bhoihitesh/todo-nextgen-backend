@@ -1,5 +1,6 @@
 const express = require('express');
 const Records = require('../models/records');
+const Users = require('../models/users');
 const routes = express.Router();
 
 
@@ -44,6 +45,26 @@ routes.delete('/delete-record/:id',async(req,res)=>{
         res.json(record);
     } catch (error) {
         res.status(500).json({message: 'Error while deleting record'});
+    }
+})
+
+// get all users
+routes.get('/users', async(req,res)=>{
+    const users = await Users.find();
+    return res.json(users);
+})
+
+// update user
+routes.put('/user/:id', async(req,res)=>{
+    const {id} = req.params;
+    const payload = req.body;
+    try {
+        const user = await Users.findByIdAndUpdate(id, req.body)
+        console.log('updated', user)
+        res.json(user);
+    } catch (error) {
+        res.status(500).json({message: "Error while updating user"});
+        console.error("Error while updating user", error);
     }
 })
 module.exports = routes;
