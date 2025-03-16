@@ -17,9 +17,9 @@ routes.get('/records',async(req,res)=>{
 
 // add records
 routes.post('/add-record',async(req,res)=>{
-    const record = await Records.insertMany(req.body);
-    res.json(record);
     try {
+        const record = await Records.insertMany(req.body);
+        res.json(record);
     } catch (error) {
         res.status(500).json({message: 'Error while adding records',error});
     }
