@@ -1,9 +1,4 @@
 const admin = require('firebase-admin');
-// Initialize the Firebase Admin SDK with your service account
-const serviceAccount = require('./serviceAccountKey.json');
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-});
 
 function sendNotification(fcmToken, title, body) {
     const message = {
