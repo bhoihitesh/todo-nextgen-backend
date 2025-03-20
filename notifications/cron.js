@@ -17,7 +17,7 @@ const notifyMe =()=> {
     //         const currentDateTime = moment();
     //         if(currentDateTime.isSameOrAfter(givenDateTime)) sendNotification(process.env.FCM_TOKEN,record?.title, record?.description);
     //     });
-    // }, 30000);
+    // }, 3000);
 }
 
 module.exports = notifyMe;

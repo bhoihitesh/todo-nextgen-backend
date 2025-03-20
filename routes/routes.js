@@ -2,7 +2,9 @@ const express = require('express');
 const Records = require('../models/records');
 const Users = require('../models/users');
 const routes = express.Router();
-
+const jwt = require('jsonwebtoken');
+const dotenv = require('dotenv');
+dotenv.config();
 
 // get records
 routes.get('/records',async(req,res)=>{
@@ -57,7 +59,6 @@ routes.get('/users', async(req,res)=>{
 // update user
 routes.put('/user/:id', async(req,res)=>{
     const {id} = req.params;
-    const payload = req.body;
     try {
         const user = await Users.findByIdAndUpdate(id, req.body)
         console.log('updated', user)
@@ -67,4 +68,55 @@ routes.put('/user/:id', async(req,res)=>{
         console.error("Error while updating user", error);
     }
 })
+
+// user login
+routes.post('/login', async(req,res)=>{
+    const payload = req.body;
+    const secretKey = process.env.SECRET_KEY;
+    try {
+    const users = await Users.find({},'username password');
+    const findUser = users.find((user)=>{
+    return user.username === payload.username
+    })
+    if(!findUser) {
+        res.status(400).json({message: "User does't registered"})
+    }
+    else if(findUser && findUser.password !== payload.password) {
+        res.status(400).json({message: 'Invalid password'})
+    }
+    else {
+        const {_id} = findUser
+        const token = jwt.sign({_id}, secretKey, { expiresIn: '30m'});
+
+        res.cookie('token', token, {
+            httpOnly: true,
+            secure: true,
+            sameSite: 'Strict',
+            path: '/',
+            maxAge: 30* 60* 1000
+        })
+
+        res.status(200).json({message: 'Login successful'})
+    }
+    } catch (error) {
+        res.status(500).json({message: "Error while updating user"});
+        console.error("Error while updating user", error);
+    }
+})
+
+//user logout
+routes.delete("/logout", async (req, res) => {
+  try {
+    res.clearCookie("token", {
+      httpOnly: true,
+      secure: true,
+      sameSite: "Strict",
+      path: "/",
+    });
+    res.status(200).json({ message: "Logout successfully" });
+  } catch (error) {
+    res.status(500).json({ message: "Error while logging out" });
+  }
+});
+
 module.exports = routes;
