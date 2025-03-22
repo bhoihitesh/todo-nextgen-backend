@@ -9,7 +9,6 @@ const app = express();
 
 // ✅ Fix: Normalize `allowedOrigins`
 const allowedOrigins = process.env.CORS_ORIGIN_DEV.split(',').map(origin => origin.trim());
-
 app.use(cors({
     origin: function (origin, callback) {
         console.log('Incoming request origin:', origin); // Debugging
