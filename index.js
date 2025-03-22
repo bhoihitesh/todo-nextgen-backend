@@ -8,7 +8,7 @@ const cors = require('cors');
 const app = express();
 
 // ✅ Fix: Normalize `allowedOrigins`
-const allowedOrigins = process.env.CORS_ORIGIN_PROD.split(',').map(origin => origin.trim());
+const allowedOrigins = process.env.CORS_ORIGIN_DEV.split(',').map(origin => origin.trim());
 
 app.use(cors({
     origin: function (origin, callback) {
