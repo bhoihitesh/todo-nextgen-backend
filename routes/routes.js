@@ -57,11 +57,15 @@ routes.get('/users', async(req,res)=>{
 })
 
 // update user
-routes.put('/user/:id', async(req,res)=>{
-    const {id} = req.params;
+routes.put('/user', async(req,res)=>{
+    const payload = req.body;
+    const users = await Users.find({},'username');
+    const findUser = users.find((user)=>{
+    return user.username === payload.username
+    })
+    const id = findUser._id.toString();
     try {
-        const user = await Users.findByIdAndUpdate(id, req.body)
-        console.log('updated', user)
+        const user = await Users.findByIdAndUpdate(id, payload)
         res.json(user);
     } catch (error) {
         res.status(500).json({message: "Error while updating user"});
