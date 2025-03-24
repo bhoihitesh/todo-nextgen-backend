@@ -15,8 +15,11 @@ admin.initializeApp({
 function sendNotification(fcmToken, title, body) {
     const message = {
       notification: {
-        title: title,
-        body: body
+        "title": title,
+        "body": body,
+        "click_action": "https://todo-nextgen.vercel.app/",
+        "android_channel_id": "high_priority_channel",
+        "priority": "high",
       },
       token: fcmToken
     };
