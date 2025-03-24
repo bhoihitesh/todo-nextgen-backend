@@ -25,9 +25,11 @@ function sendNotification(fcmToken, title, body) {
       priority: "high",
     },
     android: {
+      priority: "high",
+      ttl: 0,
       notification: {
         click_action: "https://todo-nextgen.vercel.app/",
-        priority: "high",
+        priority: "max"
       },
     },
     token: fcmToken,
