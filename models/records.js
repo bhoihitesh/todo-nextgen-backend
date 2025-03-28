@@ -9,7 +9,6 @@ const records = new mongoose.Schema({
     date: { type: String, requird: true },
     user: { type: String, required: true },
     email: { type: String, required: true },
-    fcm_token: { type: String, required: true }
   }
 });
 

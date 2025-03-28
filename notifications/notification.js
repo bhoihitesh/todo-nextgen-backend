@@ -15,6 +15,7 @@ admin.initializeApp({
 });
 
 function sendNotification(fcmToken, title, body) {
+  console.log('req body', fcmToken, title, body)
   const message = {
     notification: {
       title: title,
