@@ -19,6 +19,7 @@ const users = new mongoose.Schema({
     required: true,
   },
   fcm_token: {
+    unique: false,
     type: String,
     required: false,
     default: null,

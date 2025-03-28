@@ -15,37 +15,38 @@ admin.initializeApp({
 });
 
 function sendNotification(fcmToken, title, body) {
-  console.log('req body', fcmToken, title, body)
-  const message = {
-    notification: {
-      title: title,
-      body: body,
-    },
-    data: {
-      click_action: "https://todo-nextgen.vercel.app/",
-      priority: "high",
-    },
-    android: {
-      priority: "high",
-      ttl: 0,
+  if (fcmToken) {
+    const message = {
       notification: {
-        click_action: "https://todo-nextgen.vercel.app/",
-        priority: "max"
+        title: title,
+        body: body,
       },
-    },
-    token: fcmToken,
-  };
+      data: {
+        click_action: "https://todo-nextgen.vercel.app/",
+        priority: "high",
+      },
+      android: {
+        priority: "high",
+        ttl: 0,
+        notification: {
+          click_action: "https://todo-nextgen.vercel.app/",
+          priority: "max",
+        },
+      },
+      token: fcmToken,
+    };
 
-  // Send the notification
-  admin
-    .messaging()
-    .send(message)
-    .then((response) => {
-      console.log("Successfully sent message:", response);
-    })
-    .catch((error) => {
-      console.error("Error sending message:", error);
-    });
+    // Send the notification
+    admin
+      .messaging()
+      .send(message)
+      .then((response) => {
+        console.log("Successfully sent message:", response);
+      })
+      .catch((error) => {
+        console.error("Error sending message:", error);
+      });
+  }
 }
 
 module.exports = sendNotification;
