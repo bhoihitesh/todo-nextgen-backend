@@ -36,7 +36,7 @@ const notifyMe = () => {
         }
       });
     });
-  }, 300000);
+  }, 600000);
 };
 
 module.exports = notifyMe;
