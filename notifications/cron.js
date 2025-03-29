@@ -3,7 +3,7 @@ const users = require("../models/users");
 const records = require("../models/records");
 const sendNotification = require("./notification");
 const moment = require("moment");
-const dotenv = require('dotenv');
+const dotenv = require("dotenv");
 dotenv.config();
 
 const notifyMe = () => {
@@ -34,10 +34,11 @@ const notifyMe = () => {
             record?.description
           );
         }
+        console.log("condition1", recordStartDateTime, recordEndDateTime);
         console.log(
-          "condition",
+          "condition2",
           currentDateTime.isSameOrAfter(recordStartDateTime),
-            currentDateTime.isSameOrBefore(recordEndDateTime)
+          currentDateTime.isSameOrBefore(recordEndDateTime)
         );
       });
     });
