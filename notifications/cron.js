@@ -24,16 +24,16 @@ const notifyMe = () => {
           "DD-MM-YYYY hh:mm A"
         ).add(1, "hours");
         const currentDateTime = moment();
-        if (
-          currentDateTime.isSameOrAfter(recordStartDateTime) &&
-          currentDateTime.isSameOrBefore(recordEndDateTime)
-        ) {
+        // if (
+        //   currentDateTime.isSameOrAfter(recordStartDateTime) &&
+        //   currentDateTime.isSameOrBefore(recordEndDateTime)
+        // ) {
           return sendNotification(
             user?.fcm_token,
             record?.title,
             record?.description
           );
-        }
+        // }
       });
     });
   }, 10000);
