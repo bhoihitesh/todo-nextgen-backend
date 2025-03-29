@@ -34,6 +34,7 @@ const notifyMe = () => {
             record?.description
           );
         }
+        console.log("currentDateTime", currentDateTime)
         console.log("condition1", recordStartDateTime, recordEndDateTime);
         console.log(
           "condition2",
