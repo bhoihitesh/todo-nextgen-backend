@@ -10,7 +10,7 @@ const notifyMe = () => {
   return setInterval(async () => {
     const userData = await users.find();
     const recordData = await records.find();
-    const currentDateTime = moment(new Date());
+    const currentDateTime = moment(new Date(), "DD-MM-YYYY hh:mm A");
     console.log("currentDateTime", currentDateTime)
 
     userData.forEach((user, i) => {
@@ -25,6 +25,12 @@ const notifyMe = () => {
           recordDateTime,
           "DD-MM-YYYY hh:mm A"
         ).add(1, "hours");
+        console.log("condition1", recordStartDateTime, recordEndDateTime);
+        console.log(
+          "condition2",
+          currentDateTime.isSameOrAfter(recordStartDateTime),
+          currentDateTime.isSameOrBefore(recordEndDateTime)
+        );
         if (
           currentDateTime.isSameOrAfter(recordStartDateTime) &&
           currentDateTime.isSameOrBefore(recordEndDateTime)
@@ -35,15 +41,9 @@ const notifyMe = () => {
             record?.description
           );
         }
-        console.log("condition1", recordStartDateTime, recordEndDateTime);
-        console.log(
-          "condition2",
-          currentDateTime.isSameOrAfter(recordStartDateTime),
-          currentDateTime.isSameOrBefore(recordEndDateTime)
-        );
       });
     });
-  }, 10000);
+  }, 600000);
 };
 
 module.exports = notifyMe;
