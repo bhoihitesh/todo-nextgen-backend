@@ -25,7 +25,6 @@ const notifyMe = () => {
           currentDateTime.isSameOrBefore(recordEndDateTime)
         );
         if (
-          currentDateTime.isSameOrAfter(recordStartDateTime) &&
           currentDateTime.isSameOrBefore(recordEndDateTime)
         ) {
           return sendNotification(
