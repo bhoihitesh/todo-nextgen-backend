@@ -36,7 +36,7 @@ const notifyMe = () => {
         }
         console.log(
           "condition",
-          currentDateTime.isSameOrAfter(recordStartDateTime) &&
+          currentDateTime.isSameOrAfter(recordStartDateTime),
             currentDateTime.isSameOrBefore(recordEndDateTime)
         );
       });
